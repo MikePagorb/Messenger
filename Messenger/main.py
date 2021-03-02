@@ -1,16 +1,50 @@
-# This is a sample Python script.
+import time
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+db = [
+    {
+        'time' : time.time(),
+        'name' : 'Jack',
+        'text' : 'Hello everyone',
+    },
+    {
+        'time': time.time(),
+        'name': 'Jack',
+        'text': 'Hello everyone',
+    },
+]
 
+def send_message(name, text):
+    message = {
+        'time': time.time(),
+        'name': name,
+        'text' : text,
+    }
+    db.append(message)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def get_messages(after):
+    """messages from db after given time stamp"""
+    result = []
+    for messsage in db:
+        if messsage['time'] > after:
+            result.append(messsage)
+    return result
 
+print(db)
+t1 = db[-1]['time']
+print(get_messages(t1))
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+time.sleep(0.01)
+send_message('123','123')
+send_message('123','456')
+print(get_messages(t1))
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+t2 = db[-1]['time']
+print(get_messages(t2))
+
+time.sleep(0.01)
+send_message('123','789')
+print(get_messages(t2))
+
+# send message == положить message в db
+# get messages == достать из db сообщения,
+# которые не подгружены на клиенте
