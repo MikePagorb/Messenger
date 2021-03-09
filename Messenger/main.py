@@ -17,7 +17,7 @@ def send_message(name, text):
     message = {
         'time': time.time(),
         'name': name,
-        'text' : text,
+        'text': text,
     }
     db.append(message)
 
